@@ -29,7 +29,18 @@ app.use(express.static(path.join(__dirname, '/public')));
 io.on('connection', function(socket){
 	//for every connection, assign a username
 	//Username = User + a randomly generated number between 0 and 999,999
-	var assignedName = 'User' + Math.floor((Math.random() * 1000000));
+	while (true) {
+		var duplicate = false;
+		var assignedName = 'User' + Math.floor((Math.random() * 1000000));
+		for (var i=0; i < users.length; i++){
+			if (users[i].name.localeCompare(assignedName) == 0){
+				duplicate = true;
+			}
+		}
+		if (!duplicate){
+			break;
+		}
+	}
 	socket.emit('set username', assignedName);
 	//retrieve chat log
 	socket.emit('retrieve log', chatLog);
