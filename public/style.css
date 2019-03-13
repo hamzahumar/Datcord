@@ -65,7 +65,7 @@ form input {
 }
 
 /* Too narrow to support two columns */
-@media all and (max-width: 960px) {
+@media all and (max-width: 640px) {
 	#main, #page {
 		flex-direction: column;
 	}
