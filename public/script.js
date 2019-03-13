@@ -37,8 +37,12 @@ $(function () {
 	//retrieve and display the chat log
 	socket.on('retrieve log', function(log){
 		for (var i=0; i < log.length; i++){
+			if (log[i].user.name.localeCompare("ERROR") == 0){
+				continue;
+			}
 			appendMessage(log[i]);
 		}
+		window.scrollTo(0, document.body.scrollHeight);
 	});
 
 	//actions to be taken when a nickname is changed
